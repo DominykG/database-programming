@@ -1,29 +1,49 @@
-set serveroutput on;
+SET SERVEROUTPUT ON;
 
-declare
-    v_max_deptno number;
-    v_dept_name departments.department_name%type := 'Education';
-    v_dept_id number;
-begin
-    select max(department_id) into v_max_deptno from departments;
+DECLARE
+    v_max_deptno  NUMBER;
+    v_dept_name   departments.department_name%TYPE := 'Education';
+    v_dept_id     NUMBER;
+BEGIN
+    SELECT
+        MAX(department_id)
+    INTO v_max_deptno
+    FROM
+        departments;
+
     dbms_output.put_line('The maximum department_id is: ' || v_max_deptno);
-        
     v_dept_id := v_max_deptno + 10;
-    
-    insert into departments (department_name, department_id, location_id)
-    values(v_dept_name, v_dept_id, null);
-        
-    dbms_output.put_line('sql%rowcount gives ' || sql%rowcount);
-           
-end;
+    INSERT INTO departments (
+        department_name,
+        department_id,
+        location_id
+    ) VALUES (
+        v_dept_name,
+        v_dept_id,
+        NULL
+    );
+
+    dbms_output.put_line('sql%rowcount gives ' || SQL%rowcount);
+END;
 /
 
-begin
-    update departments
-    set location_id = 3000
-    where department_name = 'Education';
-end;
-/
-select * from departments where department_name = 'Education'; 
+BEGIN
+    UPDATE departments
+    SET
+        location_id = 3000
+    WHERE
+        department_name = 'Education';
 
-delete from departments where department_name = 'Education';
+END;
+/
+
+SELECT
+    *
+FROM
+    departments
+WHERE
+    department_name = 'Education';
+
+DELETE FROM departments
+WHERE
+    department_name = 'Education';

@@ -1,5 +1,5 @@
-set serveroutput on;
+SET SERVEROUTPUT ON;
 
-BEGIN 
-   dbms_output.put_line('Hello World'); 
+BEGIN
+    dbms_output.put_line('Hello World');
 END;
